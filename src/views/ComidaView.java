@@ -10,7 +10,7 @@ public class ComidaView {
     private final Scanner scanner;
 
     public ComidaView() {
-        this.config = Configuracion.getInstancia();
+        this.config = new Configuracion();
         this.scanner = new Scanner(System.in);
     }
 

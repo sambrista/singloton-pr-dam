@@ -10,7 +10,7 @@ public class Comida {
     public Comida(String descripcion, double cantidad) {
         this.descripcion = descripcion;
         this.cantidad = cantidad;
-        this.config = Configuracion.getInstancia();
+        this.config = new Configuracion();
     }
 
     public String getDescripcion() {

@@ -31,7 +31,7 @@ public class ComidaController {
     }
 
     public ComidaController() {
-        this.config = Configuracion.getInstancia();
+        this.config = new Configuracion();
         this.comidas = new Comida[config.getNumeroMaximoComidas()];
         this.contador = 0;
         this.vista = new ComidaView();
