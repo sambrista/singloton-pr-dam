@@ -1,6 +1,5 @@
 package controllers;
 
-import config.Configuracion;
 import models.Comida;
 import views.ComidaView;
 
@@ -8,10 +7,10 @@ public class ComidaController {
     private final ComidaView vista;
     private final Comida[] comidas;
     private int contador;
-    private Configuracion config;
+    private final int MAXIMO_COMIDAS = 10;
 
     public boolean agregarComida(String descripcion, double cantidad) {
-        if (contador < config.getNumeroMaximoComidas()) {
+        if (contador < MAXIMO_COMIDAS) {
             comidas[contador++] = new Comida(descripcion, cantidad);
             return true;
         }
@@ -31,8 +30,7 @@ public class ComidaController {
     }
 
     public ComidaController() {
-        this.config = Configuracion.getInstancia();
-        this.comidas = new Comida[config.getNumeroMaximoComidas()];
+        this.comidas = new Comida[MAXIMO_COMIDAS];
         this.contador = 0;
         this.vista = new ComidaView();
     }
@@ -48,7 +46,7 @@ public class ComidaController {
                     if (this.agregarComida(descripcion, cantidad)) {
                         vista.mostrarMensaje("✅ Comida agregada.");
                     } else {
-                        vista.mostrarMensaje("❌ No se pueden agregar más de " + config.getNumeroMaximoComidas() + " comidas.");
+                        vista.mostrarMensaje("❌ No se pueden agregar más de " + MAXIMO_COMIDAS + " comidas.");
                     }
                     break;
                 case 2:
@@ -56,10 +54,6 @@ public class ComidaController {
                     break;
                 case 3:
                     vista.mostrarTotal(this.obtenerTotal());
-                    break;
-                case 4:
-                    String unidad = vista.pideUnidadMedida();
-                    config.setUnidadMedida(unidad);
                     break;
                 case 0:
                     ejecutando = false;
